@@ -2,13 +2,15 @@
 
 Official Java client for [Hivehook](https://hivehook.com), webhook infrastructure for modern teams (inbound and outbound).
 
+Latest release: **0.1.1** on [Maven Central](https://central.sonatype.com/artifact/com.hivehook/sdk).
+
 ## Install
 
 ### Gradle
 
 ```kotlin
 dependencies {
-    implementation("com.hivehook:sdk:0.1.0")
+    implementation("com.hivehook:sdk:0.1.1")
 }
 ```
 
@@ -18,7 +20,7 @@ dependencies {
 <dependency>
   <groupId>com.hivehook</groupId>
   <artifactId>sdk</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
