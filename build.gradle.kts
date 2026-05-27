@@ -40,7 +40,7 @@ mavenPublishing {
     coordinates("com.hivehook", "sdk", "0.1.1")
     pom {
         name.set("Hivehook Java SDK")
-        description.set("Official Java client for Hivehook, the self-hostable webhook gateway.")
+        description.set("Official Java client for Hivehook, webhook infrastructure for modern teams (inbound and outbound).")
         url.set("https://hivehook.com")
         licenses {
             license {
