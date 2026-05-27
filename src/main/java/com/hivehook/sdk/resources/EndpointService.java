@@ -280,4 +280,8 @@ public final class EndpointService extends BaseService {
         return transport.executeAsync(SKIP_OUTBOUND_DLQ_ENTRY, vars("id", id))
                 .thenApply(data -> data.path("skipOutboundDlqEntry").asBoolean(false));
     }
+
+    public java.util.List<Endpoint> listAll(String applicationId, String status, String search) {
+        return paginate(after -> list(applicationId, status, search, null, null, after, null));
+    }
 }

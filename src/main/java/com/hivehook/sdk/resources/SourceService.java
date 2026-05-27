@@ -218,4 +218,8 @@ public final class SourceService extends BaseService {
         return transport.executeAsync(CLEAR_SECONDARY, vars("id", id))
                 .thenApply(data -> toType(data.get("clearSourceSecondarySecret"), Source.class));
     }
+
+    public java.util.List<Source> listAll(String status, String providerType, String search) {
+        return paginate(after -> list(status, providerType, search, null, null, after, null));
+    }
 }

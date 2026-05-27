@@ -156,4 +156,8 @@ public final class StreamConsumerService extends BaseService {
         return transport.executeAsync(ADVANCE_CURSOR, vars("id", id, "sequence", sequence))
                 .thenApply(data -> toType(data.get("advanceConsumerCursor"), StreamConsumer.class));
     }
+
+    public java.util.List<StreamConsumer> listAll(String streamId, String search) {
+        return paginate(after -> list(streamId, search, null, null, after, null));
+    }
 }

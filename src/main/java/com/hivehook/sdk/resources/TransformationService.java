@@ -208,4 +208,8 @@ public final class TransformationService extends BaseService {
         return transport.executeAsync(TEST, vars("input", input))
                 .thenApply(data -> toType(data.get("testTransformation"), TransformTestResult.class));
     }
+
+    public java.util.List<Transformation> listAll(Boolean enabled, String search) {
+        return paginate(after -> list(enabled, search, after, null));
+    }
 }

@@ -316,4 +316,8 @@ public final class OrganizationService extends BaseService {
         return transport.executeAsync(DISABLE_OTLP, vars("organizationId", organizationId))
                 .thenApply(data -> toType(data.get("disableOTLP"), Organization.class));
     }
+
+    public java.util.List<Organization> listAll(String search) {
+        return paginate(after -> list(search, null, null));
+    }
 }

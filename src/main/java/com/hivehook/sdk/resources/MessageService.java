@@ -158,4 +158,8 @@ public final class MessageService extends BaseService {
         return transport.executeAsync(SEND, vars("input", input))
                 .thenApply(data -> toType(data.get("sendMessage"), Message.class));
     }
+
+    public java.util.List<Message> listAll(String applicationId, String eventType, String status, String search) {
+        return paginate(after -> list(applicationId, eventType, status, search, null, null, after, null));
+    }
 }

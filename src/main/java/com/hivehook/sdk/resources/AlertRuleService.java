@@ -174,4 +174,8 @@ public final class AlertRuleService extends BaseService {
         return transport.executeAsync(TEST, vars("id", id))
                 .thenApply(data -> data.path("testAlertRule").asBoolean(false));
     }
+
+    public java.util.List<AlertRule> listAll(Boolean enabled, String search) {
+        return paginate(after -> list(enabled, search, null, null, after, null));
+    }
 }

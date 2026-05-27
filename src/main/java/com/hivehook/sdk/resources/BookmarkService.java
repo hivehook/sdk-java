@@ -129,4 +129,8 @@ public final class BookmarkService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteBookmark").asBoolean(false));
     }
+
+    public java.util.List<Bookmark> listAll(String eventId, String search) {
+        return paginate(after -> list(eventId, search, null, null, after, null));
+    }
 }

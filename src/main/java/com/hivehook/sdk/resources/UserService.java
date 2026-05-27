@@ -143,4 +143,8 @@ public final class UserService extends BaseService {
         return transport.executeAsync(UPDATE_ROLE, vars("id", id, "input", input))
                 .thenApply(data -> toType(data.get("updateUserRole"), User.class));
     }
+
+    public java.util.List<User> listAll(String organizationId, String search) {
+        return paginate(after -> list(organizationId, search, null, null));
+    }
 }

@@ -135,4 +135,8 @@ public final class OutboundDLQService extends BaseService {
                     return r != null ? r : new PurgeResult(0);
                 });
     }
+
+    public java.util.List<OutboundDLQEntry> listAll(String messageId, Boolean replayed, String search) {
+        return paginate(after -> list(messageId, replayed, search, null, null, after, null));
+    }
 }

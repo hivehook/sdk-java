@@ -156,4 +156,8 @@ public final class SubscriptionService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteSubscription").asBoolean(false));
     }
+
+    public java.util.List<Subscription> listAll(String sourceId, String destinationId, Boolean enabled, String search) {
+        return paginate(after -> list(sourceId, destinationId, enabled, search, null, null, after, null));
+    }
 }

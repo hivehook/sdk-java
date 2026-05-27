@@ -87,4 +87,8 @@ public final class DeliveryService extends BaseService {
         return transport.executeAsync(GET, vars("id", id))
                 .thenApply(data -> toType(data.get("delivery"), Delivery.class));
     }
+
+    public java.util.List<Delivery> listAll(String eventId, String destinationId, String subscriptionId, String status, String search) {
+        return paginate(after -> list(eventId, destinationId, subscriptionId, status, search, null, null, after, null));
+    }
 }

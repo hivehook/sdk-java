@@ -135,4 +135,8 @@ public final class DLQService extends BaseService {
                     return r != null ? r : new PurgeResult(0);
                 });
     }
+
+    public java.util.List<DLQEntry> listAll(String eventId, Boolean replayed, String search) {
+        return paginate(after -> list(eventId, replayed, search, null, null, after, null));
+    }
 }

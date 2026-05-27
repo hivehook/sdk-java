@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.hivehook"
-version = "0.1.0"
+version = "0.1.1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -37,7 +37,7 @@ tasks.test {
 mavenPublishing {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
-    coordinates("com.hivehook", "sdk", "0.1.0")
+    coordinates("com.hivehook", "sdk", "0.1.1")
     pom {
         name.set("Hivehook Java SDK")
         description.set("Official Java client for Hivehook, the self-hostable webhook gateway.")

@@ -83,4 +83,8 @@ public final class EventService extends BaseService {
         return transport.executeAsync(GET, vars("id", id))
                 .thenApply(data -> toType(data.get("event"), Event.class));
     }
+
+    public java.util.List<Event> listAll(String sourceId, String eventType, String status, String search) {
+        return paginate(after -> list(sourceId, eventType, status, search, null, null, after, null));
+    }
 }

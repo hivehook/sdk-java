@@ -83,4 +83,8 @@ public final class OutboundDeliveryService extends BaseService {
         return transport.executeAsync(GET, vars("id", id))
                 .thenApply(data -> toType(data.get("outboundDelivery"), OutboundDelivery.class));
     }
+
+    public java.util.List<OutboundDelivery> listAll(String messageId, String endpointId, String status, String search) {
+        return paginate(after -> list(messageId, endpointId, status, search, null, null, after, null));
+    }
 }

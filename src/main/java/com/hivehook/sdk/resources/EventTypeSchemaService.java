@@ -147,4 +147,8 @@ public final class EventTypeSchemaService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteEventTypeSchema").asBoolean(false));
     }
+
+    public java.util.List<EventTypeSchema> listAll(String search) {
+        return paginate(after -> list(search, null, null, after, null));
+    }
 }

@@ -115,4 +115,8 @@ public final class APIKeyService extends BaseService {
         return transport.executeAsync(REVOKE, vars("id", id))
                 .thenApply(data -> data.path("revokeAPIKey").asBoolean(false));
     }
+
+    public java.util.List<APIKey> listAll(String search) {
+        return paginate(after -> list(search, null, null));
+    }
 }

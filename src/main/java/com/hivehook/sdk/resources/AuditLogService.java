@@ -93,4 +93,8 @@ public final class AuditLogService extends BaseService {
         return transport.executeAsync(GET, vars("id", id))
                 .thenApply(data -> toType(data.get("auditLog"), AuditLog.class));
     }
+
+    public java.util.List<AuditLog> listAll(String actorType, String resourceType, String resourceId, String action, String since, String until, String search) {
+        return paginate(after -> list(actorType, resourceType, resourceId, action, since, until, search, null, null, after, null));
+    }
 }

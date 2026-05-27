@@ -147,4 +147,8 @@ public final class ApplicationService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteApplication").asBoolean(false));
     }
+
+    public java.util.List<Application> listAll(String search) {
+        return paginate(after -> list(search, null, null, after, null));
+    }
 }

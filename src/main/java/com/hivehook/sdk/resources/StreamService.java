@@ -166,4 +166,8 @@ public final class StreamService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteStream").asBoolean(false));
     }
+
+    public java.util.List<Stream> listAll(String applicationId, String status, String search) {
+        return paginate(after -> list(applicationId, status, search, null, null, after, null));
+    }
 }

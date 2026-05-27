@@ -103,4 +103,19 @@ public abstract class BaseService {
      * {@link TypeReference} for a generic {@code Map<String, Object>}.
      */
     protected static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {};
+
+    protected <T> java.util.List<T> paginate(java.util.function.Function<String, ListResult<T>> fetchPage) {
+        java.util.List<T> out = new ArrayList<>();
+        String after = null;
+        while (true) {
+            ListResult<T> page = fetchPage.apply(after);
+            out.addAll(page.nodes());
+            PageInfo pi = page.pageInfo();
+            if (pi == null || !pi.hasNextPage() || pi.endCursor() == null) {
+                break;
+            }
+            after = pi.endCursor();
+        }
+        return out;
+    }
 }

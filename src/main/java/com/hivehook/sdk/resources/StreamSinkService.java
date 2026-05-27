@@ -172,4 +172,8 @@ public final class StreamSinkService extends BaseService {
         return transport.executeAsync(DELETE, vars("id", id))
                 .thenApply(data -> data.path("deleteStreamSink").asBoolean(false));
     }
+
+    public java.util.List<StreamSink> listAll(String streamId, String status, String search) {
+        return paginate(after -> list(streamId, status, search, null, null, after, null));
+    }
 }

@@ -277,4 +277,8 @@ public final class DestinationService extends BaseService {
         return transport.executeAsync(SKIP_DLQ_ENTRY, vars("id", id))
                 .thenApply(data -> data.path("skipDLQEntry").asBoolean(false));
     }
+
+    public java.util.List<Destination> listAll(String status, String search) {
+        return paginate(after -> list(status, search, null, null, after, null));
+    }
 }
