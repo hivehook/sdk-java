@@ -33,6 +33,7 @@ public final class HivehookClient implements AutoCloseable {
     private final OrganizationService organizations;
     private final UserService users;
     private final AuditLogService auditLogs;
+    private final MetaEventConfigService metaEventConfigs;
 
     private HivehookClient(GraphQLTransport transport) {
         this.sources = new SourceService(transport);
@@ -59,6 +60,7 @@ public final class HivehookClient implements AutoCloseable {
         this.organizations = new OrganizationService(transport);
         this.users = new UserService(transport);
         this.auditLogs = new AuditLogService(transport);
+        this.metaEventConfigs = new MetaEventConfigService(transport);
     }
 
     public SourceService sources() { return sources; }
@@ -85,6 +87,7 @@ public final class HivehookClient implements AutoCloseable {
     public OrganizationService organizations() { return organizations; }
     public UserService users() { return users; }
     public AuditLogService auditLogs() { return auditLogs; }
+    public MetaEventConfigService metaEventConfigs() { return metaEventConfigs; }
 
     @Override
     public void close() {

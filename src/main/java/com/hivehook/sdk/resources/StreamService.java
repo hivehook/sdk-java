@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hivehook.sdk.GraphQLTransport;
 import com.hivehook.sdk.types.ListResult;
 import com.hivehook.sdk.types.Stream;
+import com.hivehook.sdk.types.StreamEntry;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -169,5 +170,19 @@ public final class StreamService extends BaseService {
 
     public java.util.List<Stream> listAll(String applicationId, String status, String search) {
         return paginate(after -> list(applicationId, status, search, null, null, after, null));
+    }
+
+    private static final String ENTRY_FIELDS = "id streamId sequence messageId eventType payload createdAt";
+
+    private static final String LIST_ENTRIES = "query($streamId: UUID!, $afterSequence: Int, $limit: Int) { streamEntries(streamId: $streamId, afterSequence: $afterSequence, limit: $limit) { nodes { " + ENTRY_FIELDS + " } pageInfo { total limit offset endCursor hasNextPage } } }";
+
+    public ListResult<StreamEntry> entries(String streamId, Integer afterSequence, Integer limit) {
+        JsonNode data = transport.execute(LIST_ENTRIES, vars("streamId", streamId, "afterSequence", afterSequence, "limit", limit));
+        return parseList(data.get("streamEntries"), StreamEntry.class);
+    }
+
+    public CompletableFuture<ListResult<StreamEntry>> entriesAsync(String streamId, Integer afterSequence, Integer limit) {
+        return transport.executeAsync(LIST_ENTRIES, vars("streamId", streamId, "afterSequence", afterSequence, "limit", limit))
+                .thenApply(data -> parseList(data.get("streamEntries"), StreamEntry.class));
     }
 }
